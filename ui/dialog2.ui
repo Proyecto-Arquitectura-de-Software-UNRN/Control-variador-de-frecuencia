@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Dialog2</class>
+ <widget class="QDialog" name="Dialog2">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>317</width>
+    <width>266</width>
     <height>118</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>80</x>
      <y>80</y>
      <width>91</width>
      <height>21</height>
@@ -29,7 +29,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>70</x>
      <y>10</y>
      <width>251</width>
      <height>61</height>
@@ -42,7 +42,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Parametros guardados con exito!</string>
+    <string>Parametros erroneos!</string>
    </property>
   </widget>
  </widget>

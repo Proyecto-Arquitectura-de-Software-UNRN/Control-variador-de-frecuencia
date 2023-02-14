@@ -14,13 +14,16 @@ INCLUDEPATH += \
     ui/
 
 SOURCES += \
+    src/dialog2.cpp \
     src/dialog.cpp \
     src/invoker.cpp \
     src/main.cpp \
     src/sys.cpp \
     src/vdf.cpp \
 
+
 HEADERS += \
+    inc/dialog2.h \
     inc/command.h \
     inc/dialog.h \
     inc/invoker.h \
@@ -28,6 +31,7 @@ HEADERS += \
     inc/vdf.h \
 
 FORMS += \
+    ui/dialog2.ui \
     ui/dialog.ui \
     ui/sys.ui
 

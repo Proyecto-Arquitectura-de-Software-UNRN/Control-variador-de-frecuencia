@@ -8,7 +8,7 @@
 #include <QMessageBox>
 #include <windows.h>
 #include "dialog.h"
-
+#include "dialog2.h"
 
 SYS::SYS(QWidget *parent)
     : QMainWindow(parent)
@@ -102,8 +102,12 @@ void SYS::on_OFFBOT_clicked() //Parada de emergencia
 
 void SYS::on_ACTBOT_clicked() //Actualizar parametros VDF
 {
-    if(!this->obtener_parametros())
+    if(!this->obtener_parametros()){
+        Dialog2 params_err;
+        params_err.setModal(true);
+        params_err.exec();
         return;
+    }
     invocador.Funcion(ACTUALIZAR);
     Dialog act_params;
     act_params.setModal(true);
