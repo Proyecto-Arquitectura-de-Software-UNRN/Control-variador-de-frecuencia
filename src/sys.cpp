@@ -102,7 +102,8 @@ void SYS::on_OFFBOT_clicked() //Parada de emergencia
 
 void SYS::on_ACTBOT_clicked() //Actualizar parametros VDF
 {
-    this->obtener_parametros();
+    if(!this->obtener_parametros())
+        return;
     invocador.Funcion(ACTUALIZAR);
     Dialog act_params;
     act_params.setModal(true);
@@ -128,16 +129,16 @@ void SYS::cambio_estado_reposo(){
     ui->textEdit->append("ESTADO: REPOSO");
 }
 
-void SYS::obtener_parametros(){
+bool SYS::obtener_parametros(){
 
     if(ui->lineEdit->text() == "")
-        return;
+        return false;
     if(ui->lineEdit_2->text() == "")
-        return;
+        return false;
     if(ui->lineEdit_3->text() == "" || ui->lineEdit_3->text().toInt()>sqrt(pow(variador.getVel()-ui->lineEdit->text().toInt(),2)))
-        return;
+        return false;
     if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() && !ui->radioButton_3->isChecked())
-        return;
+        return false;
 
     vreg=ui->lineEdit->text().toInt();
     tesp=ui->lineEdit_2->text().toInt();
@@ -149,4 +150,6 @@ void SYS::obtener_parametros(){
         pen = INTERMEDIA;
     else if(ui->radioButton_3->isChecked())
         pen = RAPIDA;
+
+    return true;
 }

@@ -7,6 +7,7 @@
 #include"command.h"
 #include<iostream>
 #include<stdlib.h>
+#include <math.h>
 
 #define LENTA 1
 #define INTERMEDIA 2
@@ -34,7 +35,7 @@ class SYS : public QMainWindow
 public:
     SYS(QWidget *parent = nullptr);
     ~SYS();
-    void obtener_parametros();
+    bool obtener_parametros();
 
 private slots:
     void on_ONBOT_clicked();
