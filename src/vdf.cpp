@@ -110,7 +110,7 @@ void Vdf::desaceleracion(){
         return;
     int ini = this->velocidad;
     int fin = this->velocidadregimen;
-    int resta = fin - ini;
+    int resta = ini - fin;
     int rpm=resta/this->escalas; //cada escala
     int delay_pen;
 
