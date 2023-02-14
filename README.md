@@ -1,1 +1,1 @@
-# Control-variador-de-frecuencia
+# Control variador de frecuencia
