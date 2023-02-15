@@ -53,7 +53,7 @@ public:
 //****************************
 
     void Apagar();
-    void ActualizarParametros(int *Vregimen, int *Tesp, int *esc, int *pen);
+    void ActualizarParametros(int Vregimen, int Tesp, int esc, int pen);
     void aceleracion();
     void desaceleracion();
     void delay_variador( int tiempo );

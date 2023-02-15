@@ -41,7 +41,9 @@ void SYS::on_ONBOT_clicked() //Marcha
                 ui->textEdit->clear();
                 ui->textEdit->append("Motor ENCENDIDO");
                 ui->textEdit->append("ESTADO: Acelerando");
-                invocador.Funcion(ACELERAR);
+                CAcelerar *acelerarMotor = new CAcelerar;
+                Invoker *boton_accion_apretado = new Invoker(acelerarMotor);
+                boton_accion_apretado->Funcion();
             }
             break;
 
@@ -51,14 +53,18 @@ void SYS::on_ONBOT_clicked() //Marcha
                 ui->textEdit->clear();
                 ui->textEdit->append("Motor ENCENDIDO");
                 ui->textEdit->append("ESTADO: Desacelerando");
-                invocador.Funcion(DESACELERAR);
+                CDesacelerar *desacelerarMotor = new CDesacelerar;
+                Invoker *boton_accion_apretado = new Invoker(desacelerarMotor);
+                boton_accion_apretado->Funcion();
             }
             if(variador.getVelreg() > variador.getVel() ){
                 estado = ACELERANDO;
                 ui->textEdit->clear();
                 ui->textEdit->append("Motor ENCENDIDO");
                 ui->textEdit->append("ESTADO: Acelerando");
-                invocador.Funcion(ACELERAR);
+                CAcelerar *acelerarMotor = new CAcelerar;
+                Invoker *boton_accion_apretado = new Invoker(acelerarMotor);
+                boton_accion_apretado->Funcion();
             }
             break;
 
@@ -96,19 +102,24 @@ void SYS::on_OFFBOT_clicked() //Parada de emergencia
             ui->textEdit->clear();
             ui->textEdit->append("Motor ENCENDIDO");
             ui->textEdit->append("ESTADO: Parando");
-            invocador.Funcion(PARAR);
+            CApagar *apagarMotor = new CApagar;
+            Invoker *boton_parada_apretado = new Invoker(apagarMotor);
+            boton_parada_apretado->Funcion();
     }
 }
 
 void SYS::on_ACTBOT_clicked() //Actualizar parametros VDF
 {
-    if(!this->obtener_parametros()){
+    int* params = this->obtener_parametros();
+    if(params[0] == -1){
         Dialog2 params_err;
         params_err.setModal(true);
         params_err.exec();
         return;
     }
-    invocador.Funcion(ACTUALIZAR);
+    CActualizarParametros* actualizarVdf = new CActualizarParametros(params[0],params[1],params[2],params[3]);
+    Invoker* boton_actualizar_apretado = new Invoker(actualizarVdf);
+    boton_actualizar_apretado->Funcion();
     Dialog act_params;
     act_params.setModal(true);
     act_params.exec();
@@ -133,27 +144,37 @@ void SYS::cambio_estado_reposo(){
     ui->textEdit->append("ESTADO: REPOSO");
 }
 
-bool SYS::obtener_parametros(){
+int* SYS::obtener_parametros(){
 
-    if(ui->lineEdit->text() == "")
-        return false;
-    if(ui->lineEdit_2->text() == "")
-        return false;
-    if(ui->lineEdit_3->text() == "" || ui->lineEdit_3->text().toInt()>sqrt(pow(variador.getVel()-ui->lineEdit->text().toInt(),2)))
-        return false;
-    if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() && !ui->radioButton_3->isChecked())
-        return false;
+    static int parametros[4];
 
-    vreg=ui->lineEdit->text().toInt();
-    tesp=ui->lineEdit_2->text().toInt();
-    esc=ui->lineEdit_3->text().toInt();
+    if(ui->lineEdit->text() == ""){
+        parametros[0] = -1;
+        return parametros;
+    }
+    if(ui->lineEdit_2->text() == ""){
+        parametros[0] = -1;
+        return parametros;
+    }
+    if(ui->lineEdit_3->text() == "" || ui->lineEdit_3->text().toInt()>sqrt(pow(variador.getVel()-ui->lineEdit->text().toInt(),2))){
+        parametros[0] = -1;
+        return parametros;
+    }
+    if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() && !ui->radioButton_3->isChecked()){
+        parametros[0] = -1;
+        return parametros;
+    }
+
+    parametros[0]=ui->lineEdit->text().toInt();
+    parametros[1]=ui->lineEdit_2->text().toInt();
+    parametros[2]=ui->lineEdit_3->text().toInt();
 
     if(ui->radioButton->isChecked())//boton de opciones
-        pen = LENTA;
+        parametros[3] = LENTA;
     else if(ui->radioButton_2->isChecked())
-        pen = INTERMEDIA;
+        parametros[3] = INTERMEDIA;
     else if(ui->radioButton_3->isChecked())
-        pen = RAPIDA;
+        parametros[3] = RAPIDA;
 
-    return true;
+    return (parametros);
 }

@@ -63,11 +63,11 @@ class CActualizarParametros: public Command{
 private:
 
     Vdf& var = var.getInstance();
-    int *vr, *te, *e, *p;
+    int vr, te, e, p;
 
 public:
 
-    CActualizarParametros(int *Vreg, int *Tesp, int *esc, int *pen){
+    CActualizarParametros(int Vreg, int Tesp, int esc, int pen){
         this->vr= Vreg;
         this->te= Tesp;
         this->e= esc;

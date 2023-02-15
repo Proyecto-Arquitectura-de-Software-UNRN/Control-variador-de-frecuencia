@@ -58,11 +58,11 @@ void Vdf::delay_variador( int tiempo)
 
 //*********************************************************************************************
 
-void Vdf::ActualizarParametros(int *Vregimen, int *Tesp, int *esc, int *pen){
-    this->velocidadregimen= *Vregimen;
-    this->tiempo_escala= *Tesp;
-    this->escalas= *esc;
-    this->pendiente= *pen;
+void Vdf::ActualizarParametros(int Vregimen, int Tesp, int esc, int pen){
+    this->velocidadregimen= Vregimen;
+    this->tiempo_escala= Tesp;
+    this->escalas= esc;
+    this->pendiente= pen;
 }
 
 void Vdf::aceleracion(){

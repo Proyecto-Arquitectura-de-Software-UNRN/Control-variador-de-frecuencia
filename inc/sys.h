@@ -35,7 +35,7 @@ class SYS : public QMainWindow
 public:
     SYS(QWidget *parent = nullptr);
     ~SYS();
-    bool obtener_parametros();
+    int* obtener_parametros();
 
 private slots:
     void on_ONBOT_clicked();
@@ -49,10 +49,8 @@ private slots:
     void cambio_estado_regimen();
 
 private:
-    int vreg, tesp, esc, pen; // Parametros para funcion actualizar
     int estado; // estado del sistema
     Vdf& variador = Vdf::getInstance(); // Unica instancia en todo el programa
-    Invoker invocador=Invoker(&vreg, &tesp, &esc, &pen);
     Ui::SYS *ui;
 };
 #endif // SYS_H

@@ -2,17 +2,16 @@
 #define INVOKER_H
 #include<iostream>
 #include<stdlib.h>
-
 #include"command.h"
 #include "vdf.h"
 
 class Invoker
 {
 private:
-    Command *comandos[4];
+    Command* comando;
 public:
-    Invoker(int *vreg, int *tesp, int *esc, int *pen);
-    void Funcion(int fun);
+    Invoker(Command* nuevoComando);
+    void Funcion();
 };
 
 #endif // INVOKER_H
