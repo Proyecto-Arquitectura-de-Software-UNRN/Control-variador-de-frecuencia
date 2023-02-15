@@ -19,6 +19,7 @@ private:
     int escalas;
     int pendiente;
     bool parada_acel;
+    Vdf();
 
 signals:
     void transmit_vel(int value);
@@ -26,7 +27,6 @@ signals:
     void transmit_estado_reposo();
 
 public:
-    Vdf();
     Vdf(Vdf const&) = delete; //constructor de copia
     void operator=(Vdf const&)  = delete; // Sobrecarca del =
 
